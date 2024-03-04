@@ -14,7 +14,7 @@ services:
     build:
       context: ./ui
     ports:
-      - '3000:3000'
+      - '3000:8081'
 
   database:
     container_name: bandanize-db
