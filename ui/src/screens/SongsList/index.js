@@ -1,14 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-// Views
-import Home from './src/screens/Home';
-
-export default function App() {
+export default function Home() {
   return (
     <View style={styles.container}>
-      <Home />
-      <StatusBar style="auto" />
+      <Text style={styles.title}>Songs</Text>
+      <Text style={styles.subtitle}>Band songs list</Text>
     </View>
   );
 }
@@ -19,5 +16,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 16,
   },
 });
