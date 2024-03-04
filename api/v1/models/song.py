@@ -15,7 +15,7 @@ class SongModel(BaseModel):
     title: str = Field(...)
     band: str = Field(...)
     comment: str = Field(...)
-    tabs: List[TabModel]
+    tab_ids: List[str]
     model_config = ConfigDict(
         populate_by_name = True,
         arbitrary_types_allowed = True,
@@ -24,20 +24,7 @@ class SongModel(BaseModel):
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
                 "comment": "Nice to end a live show.",
-                "tabs": [
-                    {
-                        "title": "Lead and Rythm",
-                        "instrument": "Guitar",
-                        "comment": "Solo FX is difficult to reproduce",
-                        "url": "https://tabs.ultimate-guitar.com/tab/arctic-monkeys/d-is-for-dangerous-tabs-536418"
-                    },
-                    {
-                        "title": "Bassline",
-                        "instrument": "Bass",
-                        "comment": "Love this one",
-                        "url": "https://tabs.ultimate-guitar.com/tab/arctic-monkeys/d-is-for-dangerous-bass-532894"
-                    },
-                ]
+                "tab_ids": ["60a4b5c8f0a4c9f1d4e7d6b2", "60a4b5d0f0a4c9f1d4e7d6b3"]
             }
         },
     )
@@ -46,7 +33,7 @@ class UpdateSongModel(BaseModel):
     title: Optional[str] = None
     band: Optional[str] = None
     comment: Optional[str] = None
-    tabs: Optional[List[TabModel]] = None
+    tab_ids: Optional[List[str]] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         json_encoders = {ObjectId: str},
@@ -55,20 +42,7 @@ class UpdateSongModel(BaseModel):
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
                 "comment": "Nice to end a live show.",
-                "tabs": [
-                    {
-                        "title": "Lead and Rythm",
-                        "instrument": "Guitar",
-                        "comment": "Solo FX is difficult to reproduce",
-                        "url": "https://tabs.ultimate-guitar.com/tab/arctic-monkeys/d-is-for-dangerous-tabs-536418"
-                    },
-                    {
-                        "title": "Bassline",
-                        "instrument": "Bass",
-                        "comment": "Love this one",
-                        "url": "https://tabs.ultimate-guitar.com/tab/arctic-monkeys/d-is-for-dangerous-bass-532894"
-                    },
-                ]
+                "tab_ids": ["60a4b5c8f0a4c9f1d4e7d6b2", "60a4b5d0f0a4c9f1d4e7d6b3"]
             }
         },
     )

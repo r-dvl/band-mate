@@ -13,7 +13,9 @@ class TabModel(BaseModel):
     title: str = Field(...)
     instrument: str = Field(...)
     comment: str = Field(...)
-    url: str = Field(...)
+    tuning: str = Field(...)
+    tab: str = Field(...)
+    song_id: str = Field(...)
     model_config = ConfigDict(
         populate_by_name = True,
         arbitrary_types_allowed = True,
@@ -22,7 +24,9 @@ class TabModel(BaseModel):
                 "title": "Lead and Rythm",
                 "instrument": "Guitar",
                 "comment": "Solo FX is difficult to reproduce",
-                "url": "https://tabs.ultimate-guitar.com/tab/arctic-monkeys/d-is-for-dangerous-tabs-536418",
+                "tuning": "Standard",
+                "tab": "...",
+                "song_id": "60a4b5c0f0a4c9f1d4e7d6b1"
             }
         },
     )
@@ -31,7 +35,9 @@ class UpdateTabModel(BaseModel):
     title: Optional[str] = None
     instrument: Optional[str] = None
     comment: Optional[str] = None
-    url: Optional[str] = None
+    tuning: Optional[str] = None
+    tab: Optional[str] = None
+    song_id: Optional[str] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         json_encoders = {ObjectId: str},
@@ -40,7 +46,9 @@ class UpdateTabModel(BaseModel):
                 "title": "Lead and Rythm",
                 "instrument": "Guitar",
                 "comment": "Solo FX is difficult to reproduce",
-                "url": "https://tabs.ultimate-guitar.com/tab/arctic-monkeys/d-is-for-dangerous-tabs-536418",
+                "tuning": "Standard",
+                "tab": "...",
+                "song_id": "60a4b5c0f0a4c9f1d4e7d6b1"
             }
         },
     )
