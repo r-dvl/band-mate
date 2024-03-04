@@ -9,9 +9,8 @@ from bson import ObjectId
 
 from v1.models.song import SongModel, UpdateSongModel, SongCollection
 
-
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
-db = client.mekgo
+db = client.bandanize
 songs_collection = db.get_collection("songs")
 
 router = APIRouter()

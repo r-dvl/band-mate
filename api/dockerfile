@@ -6,10 +6,11 @@ COPY ./requirements.txt /api/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /api/requirements.txt
 
-COPY ./v1 /api
+COPY ./main.py /api
+COPY ./v1 /api/v1
 
-ENV MONGODB_URL = "mongodb://localhost:27017"
+ENV MONGODB_URL="mongodb://192.168.1.36:27017"
 
 EXPOSE 8080
 
-CMD ["python3", "./api/main.py"]
+CMD ["python3", "./main.py"]

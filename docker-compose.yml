@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   api:
-    container_name: band-mate-api
+    container_name: bandanize-api
     restart: unless-stopped
     build:
       context: ./api
@@ -9,7 +9,7 @@ services:
       - '8080:8080'
 
   ui:
-    container_name: band-mate-ui
+    container_name: bandanize-ui
     restart: unless-stopped
     build:
       context: ./ui
@@ -17,7 +17,7 @@ services:
       - '3000:3000'
 
   database:
-    container_name: band-mate-db
+    container_name: bandanize-db
     image: mongo
     restart: unless-stopped
     ports:

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "band-mate",
-    "slug": "band-mate",
+    "name": "bandanize",
+    "slug": "bandanize",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "band-mate",
+    "scheme": "bandanize",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
