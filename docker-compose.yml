@@ -22,3 +22,8 @@ services:
     restart: unless-stopped
     ports:
       - '27017:27017'
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:
