@@ -1,0 +1,15 @@
+FROM python:3.10-alpine
+
+WORKDIR /api
+
+COPY ./requirements.txt /api/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r /api/requirements.txt
+
+COPY ./v1 /api
+
+ENV MONGODB_URL = "mongodb://localhost:27017"
+
+EXPOSE 8080
+
+CMD ["python3", "./api/main.py"]
