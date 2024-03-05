@@ -12,10 +12,10 @@ PyObjectId = Annotated[str, BeforeValidator(str)]
 class BandModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     name: str = Field(...)
-    photo: str = Field(...)
-    description: str = Field(...)
-    song_ids: List[str]
-    user_ids: List[str]
+    photo: str = Field(default="")
+    description: str = Field(default="")
+    song_ids: List[str] = Field(default=[])
+    user_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
         populate_by_name = True,
         arbitrary_types_allowed = True,

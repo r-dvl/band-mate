@@ -14,9 +14,9 @@ class SongModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     title: str = Field(...)
     band: str = Field(...)
-    comment: str = Field(...)
-    band_ids: List[str]
-    tab_ids: List[str]
+    comment: str = Field(default="")
+    band_ids: List[str] = Field(default=[])
+    tab_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
         populate_by_name = True,
         arbitrary_types_allowed = True,

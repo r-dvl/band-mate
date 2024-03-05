@@ -16,7 +16,7 @@ class UserModel(BaseModel):
     email: EmailStr = Field(...)
     hashed_password: str = Field(...)
     disabled: bool = Field(default=False)
-    photo: str = Field(default="empty")
+    photo: str = Field(default="")
     band_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
         populate_by_name = True,

@@ -21,10 +21,10 @@ class TabModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     title: str = Field(...)
     instrument: str = Field(...)
-    comment: str = Field(...)
-    tuning: str = Field(...)
+    comment: str = Field(default="")
+    tuning: str = Field(default="Standard")
     tab: str = Field(default=tabTemplate)
-    song_id: str = Field(...)
+    song_id: str = Field(default=[])
     model_config = ConfigDict(
         populate_by_name = True,
         arbitrary_types_allowed = True,
