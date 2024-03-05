@@ -6,7 +6,16 @@ from typing_extensions import Annotated
 
 from bson import ObjectId
 
-PyObjectId = Annotated[str, BeforeValidator(str)]    
+PyObjectId = Annotated[str, BeforeValidator(str)]   
+
+tabTemplate = """
+e|---------------------------------------------------------------|
+B|---------------------------------------------------------------|
+G|---------------------------------------------------------------|
+D|---------------------------------------------------------------|
+A|---------------------------------------------------------------|
+E|---------------------------------------------------------------|
+"""
 
 class TabModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
@@ -14,7 +23,7 @@ class TabModel(BaseModel):
     instrument: str = Field(...)
     comment: str = Field(...)
     tuning: str = Field(...)
-    tab: str = Field(...)
+    tab: str = Field(default=tabTemplate)
     song_id: str = Field(...)
     model_config = ConfigDict(
         populate_by_name = True,

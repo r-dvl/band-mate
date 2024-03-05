@@ -15,7 +15,8 @@ class BandModel(BaseModel):
     name: str = Field(...)
     photo: str = Field(...)
     description: str = Field(...)
-    users: List[str]
+    song_ids: List[str]
+    user_ids: List[str]
     model_config = ConfigDict(
         populate_by_name = True,
         arbitrary_types_allowed = True,
@@ -24,11 +25,14 @@ class BandModel(BaseModel):
                 "name": "The Sodawaves",
                 "photo": "...",
                 "description": "Indie Rock band from Algeciras",
-                "users": [
-                    "rdvl",
-                    "naisen",
-                    "chango",
-                    "arcaruss"
+                "song_ids": [
+                    "65e6d5cb2258227facc570c1",
+                    "..."
+                ],
+                "user_ids": [
+                    "65e6d5cb2258227facc570c1",
+                    "65e6d5cb2258227facc570c0",
+                    "..."
                 ]
             }
         },
@@ -38,7 +42,8 @@ class UpdateBandModel(BaseModel):
     name: Optional[str] = None
     photo: Optional[str] = None
     description: Optional[str] = None
-    users: Optional[List[str]] = None
+    song_ids: Optional[List[str]] = None
+    user_ids: Optional[List[str]] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         json_encoders = {ObjectId: str},
@@ -47,11 +52,14 @@ class UpdateBandModel(BaseModel):
                 "name": "The Sodawaves",
                 "photo": "...",
                 "description": "Indie Rock band from Algeciras",
-                "users": [
-                    "rdvl",
-                    "naisen",
-                    "chango",
-                    "arcaruss"
+                "song_ids": [
+                    "65e6d5cb2258227facc570c1",
+                    "..."
+                ],
+                "user_ids": [
+                    "65e6d5cb2258227facc570c1",
+                    "65e6d5cb2258227facc570c0",
+                    "..."
                 ]
             }
         },

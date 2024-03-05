@@ -15,6 +15,7 @@ class SongModel(BaseModel):
     title: str = Field(...)
     band: str = Field(...)
     comment: str = Field(...)
+    band_ids: List[str]
     tab_ids: List[str]
     model_config = ConfigDict(
         populate_by_name = True,
@@ -24,7 +25,14 @@ class SongModel(BaseModel):
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
                 "comment": "Nice to end a live show.",
-                "tab_ids": ["60a4b5c8f0a4c9f1d4e7d6b2", "60a4b5d0f0a4c9f1d4e7d6b3"]
+                "band_ids": [
+                    "60a4b5c8f0a4c9f1d4e7d6b2",
+                    "..."
+                ],
+                "tab_ids": [
+                    "60a4b5c8f0a4c9f1d4e7d6b2",
+                    "60a4b5d0f0a4c9f1d4e7d6b3"
+                ]
             }
         },
     )
@@ -33,6 +41,7 @@ class UpdateSongModel(BaseModel):
     title: Optional[str] = None
     band: Optional[str] = None
     comment: Optional[str] = None
+    band_ids: Optional[List[str]] = None
     tab_ids: Optional[List[str]] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
@@ -42,7 +51,14 @@ class UpdateSongModel(BaseModel):
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
                 "comment": "Nice to end a live show.",
-                "tab_ids": ["60a4b5c8f0a4c9f1d4e7d6b2", "60a4b5d0f0a4c9f1d4e7d6b3"]
+                "band_ids": [
+                    "60a4b5c8f0a4c9f1d4e7d6b2",
+                    "..."
+                ],
+                "tab_ids": [
+                    "60a4b5c8f0a4c9f1d4e7d6b2",
+                    "60a4b5d0f0a4c9f1d4e7d6b3"
+                ]
             }
         },
     )
