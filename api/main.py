@@ -1,11 +1,11 @@
 import uvicorn
 from fastapi import FastAPI
-from v1.endpoints import songs
-from v1.endpoints import tabs
+from v1.endpoints import bands, songs, tabs
 
 
 app = FastAPI()
 
+app.include_router(bands.router, prefix="/v1/bands", tags=["bands"])
 app.include_router(songs.router, prefix="/v1/songs", tags=["songs"])
 app.include_router(tabs.router, prefix="/v1/tabs", tags=["tabs"])
 
