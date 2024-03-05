@@ -13,7 +13,7 @@ class UserModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     username: str = Field(...)
     full_name: str = Field(...)
-    email: EmailStr = Field(...)
+    email: str = Field(...)
     hashed_password: str = Field(...)
     disabled: bool = Field(default=False)
     photo: str = Field(default="")
@@ -39,7 +39,7 @@ class UserModel(BaseModel):
 class UpdateUserModel(BaseModel):
     username: Optional[str] = None
     full_name: Optional[str] = None
-    email: Optional[EmailStr] = None
+    email: Optional[str] = None
     hashed_password: Optional[List[str]] = None
     photo: Optional[str] = None
     band_ids: Optional[List[str]] = None
