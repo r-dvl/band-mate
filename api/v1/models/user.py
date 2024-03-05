@@ -9,35 +9,34 @@ from bson import ObjectId
 
 PyObjectId = Annotated[str, BeforeValidator(str)]    
 
-class BandModel(BaseModel):
+class UserModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
-    name: str = Field(...)
-    photo: str = Field(...)
-    description: str = Field(...)
-    song_ids: List[str]
-    user_ids: List[str]
+    username: str = Field(...)
+    full_name: str = Field(...)
+    email: EmailStr = Field(...)
+    hashed_password: str = Field(...)
+    disabled: bool = Field(default=False)
+    photo: str = Field(default="empty")
+    band_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
         populate_by_name = True,
         arbitrary_types_allowed = True,
         json_schema_extra = {
             "example": {
-                "name": "The Sodawaves",
-                "photo": "...",
-                "description": "Indie Rock band from Algeciras",
-                "song_ids": [
-                    "65e6d5cb2258227facc570c1",
-                    "..."
-                ],
-                "user_ids": [
-                    "65e6d5cb2258227facc570c1",
-                    "65e6d5cb2258227facc570c0",
+                "username": "lizard_king",
+                "full_name": "Jim Morrison",
+                "email": "li.king@thedoors.com",
+                "hashed_password": "latuyaporsiacaso",
+                "disabled": False,
+                "photo": "empty",
+                "band_ids": [
                     "..."
                 ]
             }
         },
     )
 
-class UpdateBandModel(BaseModel):
+class UpdateUserModel(BaseModel):
     name: Optional[str] = None
     photo: Optional[str] = None
     description: Optional[str] = None
@@ -50,7 +49,7 @@ class UpdateBandModel(BaseModel):
             "example": {
                 "name": "The Sodawaves",
                 "photo": "...",
-                "description": "Indie Rock band from Algeciras",
+                "description": "Indie Rock user from Algeciras",
                 "song_ids": [
                     "65e6d5cb2258227facc570c1",
                     "..."
@@ -65,5 +64,5 @@ class UpdateBandModel(BaseModel):
     )
 
 
-class BandCollection(BaseModel):
-    bands: List[BandModel]
+class UserCollection(BaseModel):
+    users: List[UserModel]
