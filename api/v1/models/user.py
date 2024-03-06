@@ -14,7 +14,7 @@ class UserModel(BaseModel):
     username: str = Field(...)
     full_name: str = Field(...)
     email: str = Field(...)
-    hashed_password: str = Field(...)
+    hashed_password: str = Field(default="")
     disabled: bool = Field(default=True)
     photo: str = Field(default="")
     band_ids: List[str] = Field(default=[])
@@ -35,6 +35,9 @@ class UserModel(BaseModel):
             }
         },
     )
+
+class CreateUser(UserModel):
+    password: str
 
 class UpdateUserModel(BaseModel):
     username: Optional[str] = None
@@ -60,7 +63,6 @@ class UpdateUserModel(BaseModel):
             }
         },
     )
-
 
 class UserCollection(BaseModel):
     users: List[UserModel]

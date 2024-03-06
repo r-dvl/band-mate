@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
-from fastapi import Depends, APIRouter, HTTPException, status
+from fastapi import Depends, APIRouter, HTTPException, status, Body
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -13,7 +13,7 @@ from pymongo import ReturnDocument
 
 from bson import ObjectId
 
-from v1.models.user import UserModel, UpdateUserModel, UserCollection
+from v1.models.user import UserModel, CreateUser
 
 
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
@@ -37,7 +37,6 @@ class TokenData(BaseModel):
 
 class UserInDB(UserModel):
     hashed_password: str
-
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -106,6 +105,28 @@ async def get_current_active_user(
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
+
+@router.post(
+    "/users/new/",
+    response_description="Add new user",
+    response_model=UserModel,
+    status_code=status.HTTP_201_CREATED,
+    response_model_by_alias=False,
+)
+async def create_user(user: CreateUser = Body(...)):
+    db_user = await get_user(users_collection, user.username)
+    if db_user:
+        raise HTTPException(
+            status_code=400,
+            detail="Username already registered"
+        )
+    hashed_password = get_password_hash(user.password)
+    user_model = user.dict(by_alias=True, exclude=["id", "password"])
+    user_model["hashed_password"] = hashed_password
+    print(user_model)
+    new_user = await users_collection.insert_one(user_model)
+    created_user = await users_collection.find_one({"_id": new_user.inserted_id})
+    return created_user
 
 @router.post(
     "/token/",
