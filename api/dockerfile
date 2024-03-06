@@ -4,6 +4,7 @@ LABEL org.opencontainers.image.source = "https://github.com/r-dvl/bandanize"
 
 # Setup
 ENV MONGODB_URL="mongodb://localhost:27017"
+ENV SECRET_KEY=secret
 WORKDIR /api
 
 # Install dependencies
