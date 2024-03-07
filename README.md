@@ -9,7 +9,7 @@ Stop using the Whatsapp group description to organize your repertory.
 3. [UI](#UI)
 
 
-## 1. API
+## API
 Built with Python 3.10 and FastAPI and Docker.
 
 
@@ -35,7 +35,7 @@ Work in progress...
 Work in progress...
 
 
-## 2. DB
+## DB
 MongoDB.
 
 
@@ -93,7 +93,7 @@ erDiagram
 ```
 
 
-## 3. UI
+## UI
 Built with React Native and Docker.
 
 
