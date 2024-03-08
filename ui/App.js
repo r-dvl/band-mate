@@ -1,15 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 // Views
-import Home from './src/screens/Home';
+import Feed from './src/screens/Feed';
+import Hideout from './src/screens/Hideout';
+import Settings from './src/screens/Settings';
+
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Home />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="Feed">
+        <Tab.Screen name="Feed" component={Feed} />
+        <Tab.Screen name="Hideout" component={Hideout} />
+        <Tab.Screen name="Settings" component={Settings} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
