@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+// Screen components
+import Comments from './components/Comments';
+import Playlists from './components/Playlists';
+
 export default function Hideout() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hideout</Text>
-      <Text style={styles.subtitle}>Tab under development</Text>
+      <Playlists />
+      <Comments />
     </View>
   );
 }
