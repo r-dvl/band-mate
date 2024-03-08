@@ -1,9 +1,18 @@
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from v1.endpoints import bands, songs, tabs, auth, playlists
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(auth.router, prefix="/v1/auth", tags=["auth"])
 app.include_router(bands.router, prefix="/v1/bands", tags=["bands"])
