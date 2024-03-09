@@ -2,19 +2,23 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
+// Components
+import DefaultHeader from '@components/headers/DefaultHeader';
+
 export default function TabScreen() {
   const route = useRoute();
   const navigation = useNavigation();
 
   const tab = route.params.tab;
 
+  // TODO: User tab.description instead of tab.comment
   useEffect(() => {
-    navigation.setOptions({ title: `${tab.instrument} - ${tab.title}`});
-  }, [tab, navigation]);
+    navigation.setOptions({
+      headerTitle: props => <DefaultHeader {...props} title={`${tab.instrument} - ${tab.title}`} description={tab.comment} />,
+    });  }, [tab, navigation]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.comment}>Comment: {tab.comment}</Text>
       <Text style={styles.tuning}>Tuning: {tab.tuning}</Text>
       <Text style={styles.tabContent}>{tab.tab}</Text>
     </View>

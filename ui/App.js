@@ -18,9 +18,21 @@ function App() {
     <NavigationContainer>
       {user ? (
         <Tab.Navigator initialRouteName="Feed">
-          <Tab.Screen name="Feed" component={FeedTab} />
-          <Tab.Screen name="Hideout" component={HideoutTab} />
-          <Tab.Screen name="Settings" component={SettingsTab} />
+          <Tab.Screen
+            name="Feed"
+            component={FeedTab}
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            name="Hideout"
+            component={HideoutTab}
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            name="Settings"
+            component={SettingsTab}
+            options={{ headerShown: false }}
+          />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

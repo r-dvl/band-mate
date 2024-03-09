@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
+// Components
+import DefaultHeader from '@components/headers/DefaultHeader';
+
 export default function SongScreen() {
   const [tabs, setTabs] = useState([]);
   const [error, setError] = useState(null);
@@ -25,7 +28,10 @@ export default function SongScreen() {
       setError(error.toString());
     });
 
-    navigation.setOptions({ title: `${song.title} - ${song.band}` });
+    // TODO: Use song.description instead of song.comment
+    navigation.setOptions({
+      headerTitle: props => <DefaultHeader {...props} title={`${song.title} - ${song.band}`} description={song.comment} />,
+    });
   }, [song, navigation]);
 
   if (error) {

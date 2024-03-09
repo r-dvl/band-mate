@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
+// Components
+import DefaultHeader from '@components/headers/DefaultHeader';
+
 export default function PlaylistScreen() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState(null);
@@ -25,8 +28,10 @@ export default function PlaylistScreen() {
         setError(error.toString());
       });
 
-    navigation.setOptions({ title: playlist.title });
-  }, [playlist, navigation]);
+      navigation.setOptions({
+        headerTitle: props => <DefaultHeader {...props} title={playlist.title} description={playlist.description} />,
+      });
+    }, [playlist, navigation]);
 
   if (error) {
     return (
