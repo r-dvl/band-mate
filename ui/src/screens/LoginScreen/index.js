@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Button, TextInput, Text, View } from 'react-native';
-import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import qs from 'qs';
 import { AuthContext } from '@components/Auth';
@@ -13,16 +12,24 @@ export default function Login({ navigation }) {
 
   const login = async () => {
     try {
-      const response = await axios.post('http://192.168.1.38:8080/v1/auth/token/', qs.stringify({
-        username,
-        password,
-        grant_type: 'password'
-      }), {
+      const response = await fetch('http://192.168.1.38:8080/v1/auth/token/', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        },
+        body: qs.stringify({
+          username,
+          password,
+          grant_type: 'password'
+        })
       });
-      await AsyncStorage.setItem('token', response.data.access_token);
+
+      if (!response.ok) {
+        throw new Error('Incorrect username or password.');
+      }
+
+      const data = await response.json();
+      await AsyncStorage.setItem('token', data.access_token);
       setUser({ username });
     } catch (error) {
       console.error(error);
