@@ -1,15 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-// Screen components
-import Comments from './components/Comments';
-import Playlists from './components/Playlists';
-
-export default function Hideout() {
+export default function SettingsScreen() {
   return (
     <View style={styles.container}>
-      <Playlists />
-      <Comments />
+      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.subtitle}>Screen under development</Text>
     </View>
   );
 }

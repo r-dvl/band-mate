@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-export default function Playlist() {
+export default function PlaylistScreen() {
   const [playlist, setPlaylist] = useState(null);
   const route = useRoute();
 

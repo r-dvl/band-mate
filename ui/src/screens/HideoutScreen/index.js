@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Home() {
+// Screen components
+import Comments from './components/Comments';
+import Playlists from './components/Playlists';
+
+export default function HideoutScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Bandanize!</Text>
-      <Text style={styles.subtitle}>App under development</Text>
+      <Playlists />
+      <Comments />
     </View>
   );
 }

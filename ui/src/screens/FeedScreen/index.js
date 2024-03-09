@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Settings() {
+export default function FeedScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-      <Text style={styles.subtitle}>Tab under development</Text>
+      <Text style={styles.title}>Welcome to Bandanize!</Text>
+      <Text style={styles.subtitle}>App under development</Text>
     </View>
   );
 }

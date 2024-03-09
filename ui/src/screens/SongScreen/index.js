@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Song() {
+export default function SongScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Song</Text>

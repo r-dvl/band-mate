@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Tab() {
+export default function TabScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab</Text>
