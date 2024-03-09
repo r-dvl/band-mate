@@ -15,6 +15,7 @@ export default function PlaylistScreen() {
   useEffect(() => {
     // Fetch each song in the playlist
     Promise.all(playlist.song_ids.map(songId =>
+      // TODO: Protect API URL
       fetch(`http://192.168.1.38:8080/v1/songs/${songId}`)
         .then(response => response.json())
     ))

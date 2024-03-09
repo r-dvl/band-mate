@@ -16,6 +16,7 @@ export default function Login({ navigation }) {
 
   const login = async () => {
     try {
+      // TODO: Protect API URL
       const response = await fetch('http://192.168.1.38:8080/v1/auth/token/', {
         method: 'POST',
         headers: {

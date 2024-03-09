@@ -15,6 +15,7 @@ export default function SongScreen() {
   useEffect(() => {
     // Fetch each tab in the song
     Promise.all(song.tab_ids.map(tabId =>
+      // TODO: Protect API URL
       fetch(`http://192.168.1.38:8080/v1/tabs/${tabId}`)
         .then(response => response.json())
     ))

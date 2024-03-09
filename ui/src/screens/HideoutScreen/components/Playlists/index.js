@@ -9,6 +9,7 @@ export default function Playlists() {
 
   useEffect(() => {
     // TODO: Fetch each playlist in the band
+    // TODO: Protect API URL
     fetch('http://192.168.1.38:8080/v1/playlists/')
       .then(response => {
         if (!response.ok) {
