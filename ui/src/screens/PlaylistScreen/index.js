@@ -16,14 +16,14 @@ export default function PlaylistScreen() {
       fetch(`http://192.168.1.38:8080/v1/songs/${songId}`)
         .then(response => response.json())
     ))
-    .then(songsData => {
-      console.log('Fetched songs:', songsData);
-      setSongs(songsData);
-    })
-    .catch(error => {
-      console.error('Error fetching songs:', error);
-      setError(error.toString());
-    });
+      .then(songsData => {
+        console.log('Fetched songs:', songsData);
+        setSongs(songsData);
+      })
+      .catch(error => {
+        console.error('Error fetching songs:', error);
+        setError(error.toString());
+      });
 
     navigation.setOptions({ title: playlist.title });
   }, [playlist, navigation]);
@@ -55,15 +55,17 @@ export default function PlaylistScreen() {
   if (songs.length > 0) {
     return (
       <View style={styles.container}>
-        <Text style={styles.description}>{playlist.description}</Text>
+        <Text style={styles.title}>Songs</Text>
         <FlatList
           data={songs}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <Button
-              title={`${item.title} - ${item.band}`}
-              onPress={() => navigation.navigate('SongScreen', { song: item })}
-            />
+            <View style={styles.buttonContainer}>
+              <Button
+                title={`${item.title} - ${item.band}`}
+                onPress={() => navigation.navigate('SongScreen', { song: item })}
+              />
+            </View>
           )}
         />
       </View>
@@ -90,5 +92,8 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
+  },
+  buttonContainer: {
+    margin: 10,
   },
 });

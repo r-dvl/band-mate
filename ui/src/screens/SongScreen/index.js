@@ -47,15 +47,17 @@ export default function SongScreen() {
   if (tabs.length > 0) {
     return (
       <View style={styles.container}>
-        <Text style={styles.description}>{song.comment}</Text>
+        <Text style={styles.title}>Tabs</Text>
         <FlatList
           data={tabs}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
+            <View style={styles.buttonContainer}>
             <Button
               title={`${item.instrument} - ${item.title}`}
               onPress={() => navigation.navigate('TabScreen', { tab: item })}
             />
+            </View>
           )}
         />
       </View>
@@ -82,5 +84,8 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
+  },
+  buttonContainer: {
+    margin: 10,
   },
 });
