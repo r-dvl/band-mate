@@ -6,14 +6,22 @@ from typing_extensions import Annotated
 
 from bson import ObjectId
 
+from datetime import datetime
 
-PyObjectId = Annotated[str, BeforeValidator(str)]    
+
+PyObjectId = Annotated[str, BeforeValidator(str)]  
+
+class Comment(BaseModel):
+    user: str
+    comment: str
+    date_time: datetime   
 
 class BandModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     name: str = Field(...)
     photo: str = Field(default="")
     description: str = Field(default="")
+    comments: List[Comment] = Field(default=[])
     song_ids: List[str] = Field(default=[])
     user_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
@@ -24,6 +32,9 @@ class BandModel(BaseModel):
                 "name": "The Sodawaves",
                 "photo": "...",
                 "description": "Indie Rock band from Algeciras",
+                "comments": [
+                    "..."
+                ],
                 "song_ids": [
                     "65e6d5cb2258227facc570c1",
                     "..."
@@ -41,6 +52,7 @@ class UpdateBandModel(BaseModel):
     name: Optional[str] = None
     photo: Optional[str] = None
     description: Optional[str] = None
+    comments: Optional[List[Comment]] = None
     song_ids: Optional[List[str]] = None
     user_ids: Optional[List[str]] = None
     model_config = ConfigDict(
@@ -51,6 +63,9 @@ class UpdateBandModel(BaseModel):
                 "name": "The Sodawaves",
                 "photo": "...",
                 "description": "Indie Rock band from Algeciras",
+                "comments": [
+                    "..."
+                ],
                 "song_ids": [
                     "65e6d5cb2258227facc570c1",
                     "..."

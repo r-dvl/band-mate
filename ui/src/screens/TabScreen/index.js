@@ -10,10 +10,9 @@ export default function TabScreen() {
   const route = useRoute();
   const tab = route.params.tab;
 
-  // TODO: User tab.description instead of tab.comment
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: props => <DefaultHeader {...props} title={`${tab.instrument} - ${tab.title}`} description={tab.comment} />,
+      headerTitle: props => <DefaultHeader {...props} title={`${tab.instrument} - ${tab.title}`} description={tab.description} />,
     });  }, [tab, navigation]);
 
   return (

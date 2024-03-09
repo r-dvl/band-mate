@@ -21,7 +21,7 @@ class TabModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     title: str = Field(...)
     instrument: str = Field(...)
-    comment: str = Field(default="")
+    description: str = Field(default="")
     tuning: str = Field(default="Standard")
     tab: str = Field(default=tabTemplate)
     song_id: str = Field(default=[])
@@ -32,7 +32,7 @@ class TabModel(BaseModel):
             "example": {
                 "title": "Lead and Rythm",
                 "instrument": "Guitar",
-                "comment": "Solo FX is difficult to reproduce",
+                "description": "Solo FX is difficult to reproduce",
                 "tuning": "Standard",
                 "tab": "...",
                 "song_id": "60a4b5c0f0a4c9f1d4e7d6b1"
@@ -43,7 +43,7 @@ class TabModel(BaseModel):
 class UpdateTabModel(BaseModel):
     title: Optional[str] = None
     instrument: Optional[str] = None
-    comment: Optional[str] = None
+    description: Optional[str] = None
     tuning: Optional[str] = None
     tab: Optional[str] = None
     song_id: Optional[str] = None
@@ -54,7 +54,7 @@ class UpdateTabModel(BaseModel):
             "example": {
                 "title": "Lead and Rythm",
                 "instrument": "Guitar",
-                "comment": "Solo FX is difficult to reproduce",
+                "description": "Solo FX is difficult to reproduce",
                 "tuning": "Standard",
                 "tab": "...",
                 "song_id": "60a4b5c0f0a4c9f1d4e7d6b1"

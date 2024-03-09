@@ -27,10 +27,9 @@ export default function SongScreen() {
       setError(error.toString());
     });
 
-    // TODO: Use song.description instead of song.comment
     // Change header information
     navigation.setOptions({
-      headerTitle: props => <DefaultHeader {...props} title={`${song.title} - ${song.band}`} description={song.comment} />,
+      headerTitle: props => <DefaultHeader {...props} title={`${song.title} - ${song.band}`} description={song.description} />,
     });
   }, [song, navigation]);
 

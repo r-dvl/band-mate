@@ -14,7 +14,7 @@ class SongModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     title: str = Field(...)
     band: str = Field(...)
-    comment: str = Field(default="")
+    description: str = Field(default="")
     band_ids: List[str] = Field(default=[])
     tab_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
@@ -24,7 +24,7 @@ class SongModel(BaseModel):
             "example": {
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
-                "comment": "Nice to end a live show.",
+                "description": "Nice to end a live show.",
                 "band_ids": [
                     "60a4b5c8f0a4c9f1d4e7d6b2",
                     "..."
@@ -40,7 +40,7 @@ class SongModel(BaseModel):
 class UpdateSongModel(BaseModel):
     title: Optional[str] = None
     band: Optional[str] = None
-    comment: Optional[str] = None
+    description: Optional[str] = None
     band_ids: Optional[List[str]] = None
     tab_ids: Optional[List[str]] = None
     model_config = ConfigDict(
@@ -50,7 +50,7 @@ class UpdateSongModel(BaseModel):
             "example": {
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
-                "comment": "Nice to end a live show.",
+                "description": "Nice to end a live show.",
                 "band_ids": [
                     "60a4b5c8f0a4c9f1d4e7d6b2",
                     "..."
