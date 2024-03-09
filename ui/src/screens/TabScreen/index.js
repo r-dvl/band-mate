@@ -1,37 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
 export default function TabScreen() {
-  const [tab, setTab] = useState(null);
   const route = useRoute();
   const navigation = useNavigation();
 
-  useEffect(() => {
-    fetch(`http://192.168.1.38:8080/v1/tabs/${route.params.tabId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Fetched tab:', data);
-        setTab(data);
-        navigation.setOptions({ title: `${data.instrument} - ${data.title}`});
-      })
-      .catch(error => {
-        console.error('Error fetching tab:', error);
-      });
-  }, [route.params.tabId]);
+  const tab = route.params.tab;
 
-  if (!tab) {
-    return (
-      <View style={styles.container}>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
+  useEffect(() => {
+    navigation.setOptions({ title: `${tab.instrument} - ${tab.title}`});
+  }, [tab, navigation]);
 
   return (
     <View style={styles.container}>

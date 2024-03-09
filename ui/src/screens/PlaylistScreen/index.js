@@ -3,43 +3,38 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
 export default function PlaylistScreen() {
-  const [playlist, setPlaylist] = useState(null);
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState(null);
   const route = useRoute();
   const navigation = useNavigation();
 
-  useEffect(() => {
-    fetch(`http://192.168.1.38:8080/v1/playlists/${route.params.playlistId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Fetched playlist:', data);
-        setPlaylist(data);
-        navigation.setOptions({ title: data.title });
+  const playlist = route.params.playlist;
 
-        // Fetch each song in the playlist
-        Promise.all(data.song_ids.map(songId =>
-          fetch(`http://192.168.1.38:8080/v1/songs/${songId}`)
-            .then(response => response.json())
-        ))
-        .then(songsData => {
-          console.log('Fetched songs:', songsData);
-          setSongs(songsData);
-        })
-        .catch(error => {
-          console.error('Error fetching songs:', error);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching playlist:', error);
-        setError(error.toString());
-      });
-  }, [route.params.playlistId, navigation]);
+  useEffect(() => {
+    // Fetch each song in the playlist
+    Promise.all(playlist.song_ids.map(songId =>
+      fetch(`http://192.168.1.38:8080/v1/songs/${songId}`)
+        .then(response => response.json())
+    ))
+    .then(songsData => {
+      console.log('Fetched songs:', songsData);
+      setSongs(songsData);
+    })
+    .catch(error => {
+      console.error('Error fetching songs:', error);
+      setError(error.toString());
+    });
+
+    navigation.setOptions({ title: playlist.title });
+  }, [playlist, navigation]);
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>Error loading songs</Text>
+      </View>
+    );
+  }
 
   if (error) {
     return (
@@ -67,7 +62,7 @@ export default function PlaylistScreen() {
           renderItem={({ item }) => (
             <Button
               title={`${item.title} - ${item.band}`}
-              onPress={() => navigation.navigate('SongScreen', { songId: item.id })}
+              onPress={() => navigation.navigate('SongScreen', { song: item })}
             />
           )}
         />

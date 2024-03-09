@@ -32,7 +32,7 @@ export default function Playlists() {
           renderItem={({ item }) => (
             <Button
               title={item.title}
-              onPress={() => navigation.navigate('PlaylistScreen', { playlistId: item.id })}
+              onPress={() => navigation.navigate('PlaylistScreen', { playlist: item })}
             />
           )}
         />

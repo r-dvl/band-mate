@@ -3,42 +3,30 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
 export default function SongScreen() {
-  const [song, setSong] = useState(null);
   const [tabs, setTabs] = useState([]);
   const [error, setError] = useState(null);
   const route = useRoute();
   const navigation = useNavigation();
 
-  useEffect(() => {
-    fetch(`http://192.168.1.38:8080/v1/songs/${route.params.songId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Fetched song:', data);
-        setSong(data);
-        navigation.setOptions({ title: `${data.title} - ${data.band}`});
+  const song = route.params.song;
 
-        Promise.all(data.tab_ids.map(tabId =>
-          fetch(`http://192.168.1.38:8080/v1/tabs/${tabId}`)
-            .then(response => response.json())
-        ))
-        .then(tabsData => {
-          console.log('Fetched tabs:', tabsData);
-          setTabs(tabsData);
-        })
-        .catch(error => {
-          console.error('Error fetching tabs:', error);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching song:', error);
-        setError(error.toString());
-      });
-  }, [route.params.songId, navigation]);
+  useEffect(() => {
+    // Fetch each tab in the song
+    Promise.all(song.tab_ids.map(tabId =>
+      fetch(`http://192.168.1.38:8080/v1/tabs/${tabId}`)
+        .then(response => response.json())
+    ))
+    .then(tabsData => {
+      console.log('Fetched tabs:', tabsData);
+      setTabs(tabsData);
+    })
+    .catch(error => {
+      console.error('Error fetching tabs:', error);
+      setError(error.toString());
+    });
+
+    navigation.setOptions({ title: `${song.title} - ${song.band}` });
+  }, [song, navigation]);
 
   if (error) {
     return (
@@ -66,7 +54,7 @@ export default function SongScreen() {
           renderItem={({ item }) => (
             <Button
               title={`${item.instrument} - ${item.title}`}
-              onPress={() => navigation.navigate('TabScreen', { tabId: item.id })}
+              onPress={() => navigation.navigate('TabScreen', { tab: item })}
             />
           )}
         />
