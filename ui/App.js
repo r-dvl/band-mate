@@ -1,31 +1,38 @@
-import { StyleSheet, View } from 'react-native';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// Views
+import { AuthContext, AuthProvider } from '@components/Auth';
+import LoginScreen from '@screens/LoginScreen';
 import FeedTab from '@tabs/FeedTab';
 import HideoutTab from '@tabs/HideoutTab';
 import SettingsTab from '@tabs/SettingsTab';
 
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Feed">
-        <Tab.Screen name="Feed" component={FeedTab} />
-        <Tab.Screen name="Hideout" component={HideoutTab} />
-        <Tab.Screen name="Settings" component={SettingsTab} />
-      </Tab.Navigator>
+      {user ? (
+        <Tab.Navigator initialRouteName="Feed">
+          <Tab.Screen name="Feed" component={FeedTab} />
+          <Tab.Screen name="Hideout" component={HideoutTab} />
+          <Tab.Screen name="Settings" component={SettingsTab} />
+        </Tab.Navigator>
+      ) : (
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={LoginScreen} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => (
+  <AuthProvider>
+    <App />
+  </AuthProvider>
+);
