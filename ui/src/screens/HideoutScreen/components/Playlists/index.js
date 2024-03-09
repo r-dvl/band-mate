@@ -25,16 +25,20 @@ export default function Playlists() {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={playlists}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <Button
-            title={item.title}
-            onPress={() => navigation.navigate('PlaylistScreen', { playlistId: item.id })}
-          />
-        )}
-      />
+      {playlists.length > 0 ? (
+        <FlatList
+          data={playlists}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <Button
+              title={item.title}
+              onPress={() => navigation.navigate('PlaylistScreen', { playlistId: item.id })}
+            />
+          )}
+        />
+      ) : (
+        <Text>Create playlist</Text>
+      )}
     </View>
   );
 }

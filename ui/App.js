@@ -3,9 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Views
-import FeedStack from '@stacks/FeedStack';
-import HideoutStack from '@stacks/HideoutStack';
-import SettingsStack from '@stacks/SettingsStack';
+import FeedTab from '@tabs/FeedTab';
+import HideoutTab from '@tabs/HideoutTab';
+import SettingsTab from '@tabs/SettingsTab';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,9 +13,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator initialRouteName="Feed">
-        <Tab.Screen name="Feed" component={FeedStack} />
-        <Tab.Screen name="Hideout" component={HideoutStack} />
-        <Tab.Screen name="Settings" component={SettingsStack} />
+        <Tab.Screen name="Feed" component={FeedTab} />
+        <Tab.Screen name="Hideout" component={HideoutTab} />
+        <Tab.Screen name="Settings" component={SettingsTab} />
       </Tab.Navigator>
     </NavigationContainer>
   );

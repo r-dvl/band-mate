@@ -6,7 +6,7 @@ import FeedScreen from '@screens/FeedScreen';
 const Stack = createStackNavigator();
 
 // Crea un StackNavigator para la pestaña Hideout
-export default function FeedStack() {
+export default function FeedTab() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="FeedScreen" component={FeedScreen} options={{ headerShown: false }}/>

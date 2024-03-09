@@ -6,7 +6,7 @@ import PlaylistScreen from '@screens/PlaylistScreen';
 
 const Stack = createStackNavigator();
 
-export default function HideoutStack() {
+export default function HideoutTab() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="HideoutScreen" component={HideoutScreen} options={{ headerShown: false }}/>

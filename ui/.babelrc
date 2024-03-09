@@ -6,7 +6,7 @@
           "@root": ".",
           "@components": "./src/components",
           "@assets": "./src/assets",
-          "@stacks": "./src/navigation/stacks",
+          "@tabs": "./src/navigation/tabs",
           "@screens": "./src/screens"
         }
       }]
