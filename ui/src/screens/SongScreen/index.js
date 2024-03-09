@@ -8,9 +8,8 @@ import DefaultHeader from '@components/headers/DefaultHeader';
 export default function SongScreen() {
   const [tabs, setTabs] = useState([]);
   const [error, setError] = useState(null);
-  const route = useRoute();
   const navigation = useNavigation();
-
+  const route = useRoute();
   const song = route.params.song;
 
   useEffect(() => {
@@ -29,6 +28,7 @@ export default function SongScreen() {
     });
 
     // TODO: Use song.description instead of song.comment
+    // Change header information
     navigation.setOptions({
       headerTitle: props => <DefaultHeader {...props} title={`${song.title} - ${song.band}`} description={song.comment} />,
     });
@@ -40,17 +40,13 @@ export default function SongScreen() {
         <Text>Error loading song</Text>
       </View>
     );
-  }
-
-  if (!song) {
+  } else if (!song) {
     return (
       <View style={styles.container}>
         <Text>Loading...</Text>
       </View>
     );
-  }
-
-  if (tabs.length > 0) {
+  } else if (tabs.length > 0) {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Tabs</Text>
@@ -68,13 +64,13 @@ export default function SongScreen() {
         />
       </View>
     );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text>There are not tabs for this song.</Text>
+      </View>
+    );
   }
-
-  return (
-    <View style={styles.container}>
-      <Text>There are not tabs for this song.</Text>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({

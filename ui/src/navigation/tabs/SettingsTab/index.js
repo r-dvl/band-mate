@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
-// Views
+// Screens
 import SettingsScreen from '@screens/SettingsScreen';
 
 const Stack = createStackNavigator();

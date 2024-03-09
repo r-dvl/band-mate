@@ -6,9 +6,8 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import DefaultHeader from '@components/headers/DefaultHeader';
 
 export default function TabScreen() {
-  const route = useRoute();
   const navigation = useNavigation();
-
+  const route = useRoute();
   const tab = route.params.tab;
 
   // TODO: User tab.description instead of tab.comment

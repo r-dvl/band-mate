@@ -1,11 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
-// Views
+// Screens
 import FeedScreen from '@screens/FeedScreen';
 
 const Stack = createStackNavigator();
 
-// Crea un StackNavigator para la pestaña Hideout
 export default function FeedTab() {
   return (
     <Stack.Navigator>

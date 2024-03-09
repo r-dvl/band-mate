@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
-// Views
+// Screens
 import HideoutScreen from '@screens/HideoutScreen';
 import PlaylistScreen from '@screens/PlaylistScreen';
 import SongScreen from '@screens/SongScreen';

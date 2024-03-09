@@ -1,7 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Button, TextInput, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Dependencies
 import qs from 'qs';
+
+// Components
 import { AuthContext } from '@components/Auth';
 
 export default function Login({ navigation }) {

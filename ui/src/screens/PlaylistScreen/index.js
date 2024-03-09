@@ -8,9 +8,8 @@ import DefaultHeader from '@components/headers/DefaultHeader';
 export default function PlaylistScreen() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState(null);
-  const route = useRoute();
   const navigation = useNavigation();
-
+  const route = useRoute();
   const playlist = route.params.playlist;
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export default function PlaylistScreen() {
         console.error('Error fetching songs:', error);
         setError(error.toString());
       });
-
+      // Change header information
       navigation.setOptions({
         headerTitle: props => <DefaultHeader {...props} title={playlist.title} description={playlist.description} />,
       });
@@ -39,25 +38,13 @@ export default function PlaylistScreen() {
         <Text>Error loading songs</Text>
       </View>
     );
-  }
-
-  if (error) {
-    return (
-      <View style={styles.container}>
-        <Text>Error laoading playlist: {error}</Text>
-      </View>
-    );
-  }
-
-  if (!playlist) {
+  } else if (!playlist) {
     return (
       <View style={styles.container}>
         <Text>Loading...</Text>
       </View>
     );
-  }
-
-  if (songs.length > 0) {
+  } else if (songs.length > 0) {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Songs</Text>
@@ -75,13 +62,13 @@ export default function PlaylistScreen() {
         />
       </View>
     );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text>There are not songs in this playlist</Text>
+      </View>
+    );
   }
-
-  return (
-    <View style={styles.container}>
-      <Text>There are not songs in this playlist</Text>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({

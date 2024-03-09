@@ -4,9 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Playlists() {
   const [playlists, setPlaylists] = useState([]);
+  const [error, setError] = useState(null);
   const navigation = useNavigation();
 
   useEffect(() => {
+    // TODO: Fetch each playlist in the band
     fetch('http://192.168.1.38:8080/v1/playlists/')
       .then(response => {
         if (!response.ok) {
@@ -20,13 +22,20 @@ export default function Playlists() {
       })
       .catch(error => {
         console.log('Error fetching data:', error);
+        setError(error.toString());
       });
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Playlists</Text>
-      {playlists.length > 0 ? (
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>Error loading playlists</Text>
+      </View>
+    );
+  } else if (playlists.length > 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Playlists</Text>
         <FlatList
           data={playlists}
           keyExtractor={item => item.id}
@@ -39,11 +48,15 @@ export default function Playlists() {
             </View>
           )}
         />
-      ) : (
-        <Text style={styles.title}>Create playlist</Text>
-      )}
-    </View>
-  );
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>There are not playlists in this band</Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
