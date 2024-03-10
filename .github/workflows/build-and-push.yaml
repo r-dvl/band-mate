@@ -1,16 +1,24 @@
-name: Build and Push Docker images
+name: Build and release
 
 on:
   push:
     tags:
       - '*'
 
+env:
+  IMAGE_NAME_API: bandanize-api
+  IMAGE_NAME_UI: bandanize-ui
+
 jobs:
   build-and-push:
+    name: Build and push
     runs-on: ubuntu-latest
+    permissions: write-all
+    outputs:
+      tag: ${{ steps.get_tag.outputs.tag }}
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Docker Builder
@@ -24,19 +32,37 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract tag name
-        shell: bash
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        id: get_tag
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       - name: Build and push API image
         uses: docker/build-push-action@v2
         with:
           context: ./api
           push: true
-          tags: ghcr.io/${{ github.repository }}/bandanize-api:latest
+          tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_API }}:${{ steps.get_tag.outputs.tag }}
 
       - name: Build and push UI image
         uses: docker/build-push-action@v2
         with:
           context: ./ui
           push: true
-          tags: ghcr.io/${{ github.repository }}/bandanize-ui:latest
+          tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_UI }}:${{ steps.get_tag.outputs.tag }}
+
+  create-release:
+    name: Create release
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.build-and-push.outputs.tag }}
+          release_name: Release ${{ needs.build-and-push.outputs.tag }}
+          draft: false
+          prerelease: false
