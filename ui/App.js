@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// Components
 import { AuthContext, AuthProvider } from '@components/Auth';
+
+// Screens
 import LoginScreen from '@screens/LoginScreen';
-import FeedTab from '@tabs/FeedTab';
-import HideoutTab from '@tabs/HideoutTab';
-import SettingsTab from '@tabs/SettingsTab';
+import BandSelectionScreen from '@screens/BandSelectionScreen'
+
+// Tabs
+import MainTabs from '@navigation/tabs/MainTabs';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -17,23 +20,17 @@ function App() {
   return (
     <NavigationContainer>
       {user ? (
-        <Tab.Navigator initialRouteName="Feed">
-          <Tab.Screen
-            name="Feed"
-            component={FeedTab}
+        <Stack.Navigator initialRouteName="Feed">
+          <Stack.Screen
+            name="MainTabs"
+            component={MainTabs}
             options={{ headerShown: false }}
           />
-          <Tab.Screen
-            name="Hideout"
-            component={HideoutTab}
-            options={{ headerShown: false }}
+          <Stack.Screen
+            name="BandSelectionScreen"
+            component={BandSelectionScreen}
           />
-          <Tab.Screen
-            name="Settings"
-            component={SettingsTab}
-            options={{ headerShown: false }}
-          />
-        </Tab.Navigator>
+        </Stack.Navigator>
       ) : (
         <Stack.Navigator>
           <Stack.Screen name="Login" component={LoginScreen} />
