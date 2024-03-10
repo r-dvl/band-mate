@@ -40,14 +40,18 @@ jobs:
         with:
           context: ./api
           push: true
-          tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_API }}:${{ steps.get_tag.outputs.tag }}
+          tags: |
+            ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_API }}:${{ steps.get_tag.outputs.tag }}
+            ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_API }}:latest
 
       - name: Build and push UI image
         uses: docker/build-push-action@v2
         with:
           context: ./ui
           push: true
-          tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_UI }}:${{ steps.get_tag.outputs.tag }}
+          tags: |
+            ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_UI }}:${{ steps.get_tag.outputs.tag }}
+            ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME_UI }}:latest
 
   create-release:
     name: Create release
