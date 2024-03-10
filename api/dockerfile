@@ -1,6 +1,7 @@
 FROM python:3.10-alpine
 
 LABEL org.opencontainers.image.source = "https://github.com/r-dvl/bandanize"
+LABEL org.opencontainers.image.description "Bandanize app API"
 
 # Setup
 ENV MONGODB_URL="mongodb://localhost:27017"
