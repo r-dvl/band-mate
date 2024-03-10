@@ -6,7 +6,6 @@ from typing_extensions import Annotated
 
 from bson import ObjectId
 
-from v1.models.tab import TabModel
 
 PyObjectId = Annotated[str, BeforeValidator(str)]    
 
@@ -15,7 +14,7 @@ class SongModel(BaseModel):
     title: str = Field(...)
     band: str = Field(...)
     description: str = Field(default="")
-    band_ids: List[str] = Field(default=[])
+    playlist_id: str = Field(default="")
     tab_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
         populate_by_name = True,
@@ -25,10 +24,7 @@ class SongModel(BaseModel):
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
                 "description": "Nice to end a live show.",
-                "band_ids": [
-                    "60a4b5c8f0a4c9f1d4e7d6b2",
-                    "..."
-                ],
+                "playlist_id": "60a4b5c8f0a4c9f1d4e7d6b2",
                 "tab_ids": [
                     "60a4b5c8f0a4c9f1d4e7d6b2",
                     "60a4b5d0f0a4c9f1d4e7d6b3"
@@ -41,7 +37,7 @@ class UpdateSongModel(BaseModel):
     title: Optional[str] = None
     band: Optional[str] = None
     description: Optional[str] = None
-    band_ids: Optional[List[str]] = None
+    playlist_id: Optional[List[str]] = None
     tab_ids: Optional[List[str]] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
@@ -51,10 +47,7 @@ class UpdateSongModel(BaseModel):
                 "title": "D is for Dangerous",
                 "band": "Arctic Monkeys",
                 "description": "Nice to end a live show.",
-                "band_ids": [
-                    "60a4b5c8f0a4c9f1d4e7d6b2",
-                    "..."
-                ],
+                "playlist_id": "60a4b5c8f0a4c9f1d4e7d6b2",
                 "tab_ids": [
                     "60a4b5c8f0a4c9f1d4e7d6b2",
                     "60a4b5d0f0a4c9f1d4e7d6b3"
