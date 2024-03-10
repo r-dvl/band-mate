@@ -23,16 +23,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract tag name
+        shell: bash
+        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
       - name: Build and push API image
         uses: docker/build-push-action@v2
         with:
           context: ./api
           push: true
-          tags: ghcr.io/r-dvl/${{ github.repository }}/bandanize-api:latest
+          tags: ghcr.io/${{ github.repository }}/bandanize-api:latest
 
       - name: Build and push UI image
         uses: docker/build-push-action@v2
         with:
           context: ./ui
           push: true
-          tags: ghcr.io/r-dvl/${{ github.repository }}/bandanize-ui:latest
+          tags: ghcr.io/${{ github.repository }}/bandanize-ui:latest
