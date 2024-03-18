@@ -53,6 +53,10 @@ erDiagram
 	    string name
 	    string photo
 	    string description
+	    string genre
+	    string city
+            array[string] members
+	    array[string] rrss
 	    array[string] song_ids
 	    array[string] user_ids
     }
@@ -61,34 +65,39 @@ erDiagram
 	    string username
 	    string full_name
 	    string email
+            string city
+	    array[string]
+            array[string] rrss
 	    string hashed_password
 	    bool disabled
 	    string photo
 	    array[string] band_ids
-	}
+    }
     PLAYLIST {
-		string id
+	    string id
 	    string title
 	    string description
+	    string photo
 	    string band_id
 	    array[string] song_ids
     }
     SONG {
-		string id
+	    string id
 	    string title
 	    string band
-	    string comment
-	    array[string] band_ids
+	    string bpm
+	    string key
+	    array[string] media
+ 	    array[string] band_ids
 	    array[string] tab_ids
     }
     TAB {
 	    string id
 	    string title
 	    string instrument
-	    string comment
 	    string tuning
 	    string tab
-	    array[string] song_id
+	    string song_id
     }
 ```
 
