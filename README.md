@@ -55,7 +55,7 @@ erDiagram
 	    string description
 	    string genre
 	    string city
-            array[string] members
+		array[string] members
 	    array[string] rrss
 	    array[string] song_ids
 	    array[string] user_ids
@@ -65,9 +65,8 @@ erDiagram
 	    string username
 	    string full_name
 	    string email
-            string city
-	    array[string]
-            array[string] rrss
+		string city
+		array[string] rrss
 	    string hashed_password
 	    bool disabled
 	    string photo
