@@ -11,8 +11,9 @@ export default function TabScreen() {
   const tab = route.params.tab;
 
   useEffect(() => {
+    // TODO: Instrument as a photo
     navigation.setOptions({
-      headerTitle: props => <DefaultHeader {...props} title={`${tab.instrument} - ${tab.title}`} description={tab.description} />,
+      headerTitle: props => <DefaultHeader {...props} title={`${tab.instrument} - ${tab.title}`} description={tab.tuning} />,
     });  }, [tab, navigation]);
 
   return (

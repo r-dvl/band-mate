@@ -30,7 +30,7 @@ export default function SongScreen() {
 
     // Change header information
     navigation.setOptions({
-      headerTitle: props => <DefaultHeader {...props} title={`${song.title} - ${song.band}`} description={song.description} />,
+      headerTitle: props => <DefaultHeader {...props} title={`${song.title} - ${song.band}`} description={`${song.bpm}\n${song.key}`} />,
     });
   }, [song, navigation]);
 
