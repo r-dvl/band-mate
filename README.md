@@ -95,7 +95,7 @@ erDiagram
 	    string title
 	    string instrument
 	    string tuning
-	    string tab
+	    string data
 	    string song_id
     }
 ```

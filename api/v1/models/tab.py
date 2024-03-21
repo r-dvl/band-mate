@@ -6,24 +6,14 @@ from typing_extensions import Annotated
 
 from bson import ObjectId
 
-PyObjectId = Annotated[str, BeforeValidator(str)]   
-
-tabTemplate = """
-e|---------------------------------------------------------------|
-B|---------------------------------------------------------------|
-G|---------------------------------------------------------------|
-D|---------------------------------------------------------------|
-A|---------------------------------------------------------------|
-E|---------------------------------------------------------------|
-"""
+PyObjectId = Annotated[str, BeforeValidator(str)]
 
 class TabModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     title: str = Field(...)
     instrument: str = Field(...)
-    description: str = Field(default="")
     tuning: str = Field(default="Standard")
-    tab: str = Field(default=tabTemplate)
+    data: str = Field(default="")
     song_id: str = Field(default=[])
     model_config = ConfigDict(
         populate_by_name = True,
@@ -32,9 +22,8 @@ class TabModel(BaseModel):
             "example": {
                 "title": "Lead and Rythm",
                 "instrument": "Guitar",
-                "description": "Solo FX is difficult to reproduce",
                 "tuning": "Standard",
-                "tab": "...",
+                "data": "...",
                 "song_id": "60a4b5c0f0a4c9f1d4e7d6b1"
             }
         },
@@ -43,9 +32,8 @@ class TabModel(BaseModel):
 class UpdateTabModel(BaseModel):
     title: Optional[str] = None
     instrument: Optional[str] = None
-    description: Optional[str] = None
     tuning: Optional[str] = None
-    tab: Optional[str] = None
+    data: Optional[str] = None
     song_id: Optional[str] = None
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
@@ -54,9 +42,8 @@ class UpdateTabModel(BaseModel):
             "example": {
                 "title": "Lead and Rythm",
                 "instrument": "Guitar",
-                "description": "Solo FX is difficult to reproduce",
                 "tuning": "Standard",
-                "tab": "...",
+                "data": "...",
                 "song_id": "60a4b5c0f0a4c9f1d4e7d6b1"
             }
         },
