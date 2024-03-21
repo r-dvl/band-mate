@@ -7,12 +7,13 @@ from typing_extensions import Annotated
 from bson import ObjectId
 
 
-PyObjectId = Annotated[str, BeforeValidator(str)]    
+PyObjectId = Annotated[str, BeforeValidator(str)]
 
 class PlaylistModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     title: str = Field(...)
     description: str = Field(default="")
+    photo: str = Field(default="")
     band_id: str = Field(...)
     song_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
@@ -22,6 +23,7 @@ class PlaylistModel(BaseModel):
             "example": {
                 "title": "Farandula 2024",
                 "description": "Live playlist.",
+                "photo": "",
                 "band_id": "60a4b5c8f0a4c9f1d4e7d6b2",
                 "song_ids": [
                     "60a4b5c8f0a4c9f1d4e7d6b2",
@@ -34,6 +36,7 @@ class PlaylistModel(BaseModel):
 class UpdatePlaylistModel(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
+    photo: Optional[str] = None
     band_id: Optional[str] = None
     song_ids: Optional[List[str]] = None
     model_config = ConfigDict(
@@ -43,6 +46,7 @@ class UpdatePlaylistModel(BaseModel):
             "example": {
                 "title": "Farandula 2024",
                 "description": "Live playlist.",
+                "photo": "",
                 "band_id": "60a4b5c8f0a4c9f1d4e7d6b2",
                 "song_ids": [
                     "60a4b5c8f0a4c9f1d4e7d6b2",
