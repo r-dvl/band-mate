@@ -9,19 +9,22 @@ from bson import ObjectId
 from datetime import datetime
 
 
-PyObjectId = Annotated[str, BeforeValidator(str)]  
+PyObjectId = Annotated[str, BeforeValidator(str)]
 
 class Comment(BaseModel):
     user: str
     comment: str
-    date_time: datetime   
+    date_time: datetime
 
 class BandModel(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     name: str = Field(...)
     photo: str = Field(default="")
     description: str = Field(default="")
+    genre: str = Field(default="")
+    city: str = Field(default="")
     comments: List[Comment] = Field(default=[])
+    rrss: List[str] = Field(default=[])
     song_ids: List[str] = Field(default=[])
     user_ids: List[str] = Field(default=[])
     model_config = ConfigDict(
@@ -32,7 +35,12 @@ class BandModel(BaseModel):
                 "name": "The Sodawaves",
                 "photo": "...",
                 "description": "Indie Rock band from Algeciras",
+                "genre": "Indie",
+                "city": "Algeciras",
                 "comments": [
+                    "..."
+                ],
+                "rrss": [
                     "..."
                 ],
                 "song_ids": [
@@ -52,7 +60,10 @@ class UpdateBandModel(BaseModel):
     name: Optional[str] = None
     photo: Optional[str] = None
     description: Optional[str] = None
+    genre: Optional[str] = None
+    city: Optional[str] = None
     comments: Optional[List[Comment]] = None
+    rrss: Optional[List[str]] = None
     song_ids: Optional[List[str]] = None
     user_ids: Optional[List[str]] = None
     model_config = ConfigDict(
@@ -63,7 +74,12 @@ class UpdateBandModel(BaseModel):
                 "name": "The Sodawaves",
                 "photo": "...",
                 "description": "Indie Rock band from Algeciras",
+                "genre": "Indie",
+                "city": "Algeciras",
                 "comments": [
+                    "..."
+                ],
+                "rrss": [
                     "..."
                 ],
                 "song_ids": [
